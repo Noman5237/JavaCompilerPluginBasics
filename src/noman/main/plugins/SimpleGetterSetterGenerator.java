@@ -58,17 +58,17 @@ public class SimpleGetterSetterGenerator {
 				.collect(Collectors.toList()));
 	}
 
-//	private JCTree.JCMethodDecl createGetter(JCTree.JCVariableDecl jcVarDecl) {
-//		String name = jcVarDecl.getName().toString();
-//		Name methodName = names.fromString("get" + Character.toUpperCase(name.charAt(0)) + name.substring(1));
-//
-//		JCTree.JCIdent varIdent = treeMaker.Ident(jcVarDecl.getName());
-//		JCTree.JCReturn returnStmt = treeMaker.Return(varIdent);
-//
-//		JCTree.JCBlock methodBody = treeMaker.Block(0, List.of(returnStmt));
-//
-//		return createMethodDefinition(Flags.PUBLIC, methodName, jcVarDecl.vartype, methodBody);
-//	}
+	private JCTree.JCMethodDecl createGetter(JCTree.JCVariableDecl jcVarDecl) {
+		String name = jcVarDecl.getName().toString();
+		Name methodName = names.fromString("get" + Character.toUpperCase(name.charAt(0)) + name.substring(1));
+
+		JCTree.JCIdent varIdent = treeMaker.Ident(jcVarDecl.getName());
+		JCTree.JCReturn returnStmt = treeMaker.Return(varIdent);
+
+		JCTree.JCBlock methodBody = treeMaker.Block(0, List.of(returnStmt));
+
+		return createMethodDefinition(Flags.PUBLIC, methodName, jcVarDecl.vartype, methodBody);
+	}
 	
 	private JCTree.JCMethodDecl createSetter(JCTree.JCVariableDecl jcVarDecl) {
 		String name = jcVarDecl.getName().toString();
@@ -81,9 +81,10 @@ public class SimpleGetterSetterGenerator {
 				names.fromString(camelCasedParamName), jcVarDecl.vartype, null);
 		JCTree.JCIdent paramIdent = treeMaker.Ident(paramVarDecl.getName());
 		
+//		Uncommenting following line will produce null pointer exception
 //		JCTree.JCStatement assign = treeMaker.Assignment(varIdent.sym, paramIdent);
 //		JCTree.JCBlock methodBody = treeMaker.Block(0, List.of(assign));
-//
+		
 		JCTree.JCBlock methodBody = treeMaker.Block(0, List.nil());
 		
 		return treeMaker.MethodDef(

@@ -9,7 +9,7 @@ public class GetterSetterPlugin implements Plugin {
 	
 	@Override
 	public String getName() {
-		return "Getter";
+		return "GetterSetter";
 	}
 	
 	@Override
